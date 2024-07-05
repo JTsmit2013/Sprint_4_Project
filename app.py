@@ -14,7 +14,7 @@ st.header('Vehicle types by manufacturer')
 st.write(px.histogram(df, x='manufacturer', color='type'))
 
 # -------------------------------------------------------
-st.header('Histogram of `condition` vs `model_year`'
+st.header('Histogram of `condition` vs `model_year`')
 st.write(px.histogram(df, x='model_year', color='condition'))
           
 # -------------------------------------------------------
