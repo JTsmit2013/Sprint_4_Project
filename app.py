@@ -12,6 +12,15 @@ df['price'] = pd.to_numeric(df['price'], errors='coerce')
 df = df.dropna(subset=['price'])
 df['price'] = df['price'].astype(int)
 
+# Convert model_year to integer
+df['model_year'] = pd.to_numeric(df['model_year'], errors='coerce').fillna(0).astype(int)
+
+# Handle other columns with potential mixed types
+df['odometer'] = pd.to_numeric(df['odometer'], errors='coerce').fillna(0).astype(float)
+df['cylinders'] = pd.to_numeric(df['cylinders'], errors='coerce').fillna(0).astype(float)
+df['is_4wd'] = pd.to_numeric(df['is_4wd'], errors='coerce').fillna(0).astype(float)
+df['days_listed'] = pd.to_numeric(df['days_listed'], errors='coerce').fillna(0).astype(int)
+
 st.header('Raw Vehicle Data')
 st.dataframe(df)
 
