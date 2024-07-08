@@ -21,6 +21,14 @@ df['cylinders'] = pd.to_numeric(df['cylinders'], errors='coerce').fillna(0).asty
 df['is_4wd'] = pd.to_numeric(df['is_4wd'], errors='coerce').fillna(0).astype(float)
 df['days_listed'] = pd.to_numeric(df['days_listed'], errors='coerce').fillna(0).astype(int)
 
+# Debugging: Print column types to identify any inconsistencies
+st.write("Data types after conversion:")
+st.write(df.dtypes)
+
+# Debugging: Check for any remaining NaNs
+st.write("Summary of NaNs in DataFrame:")
+st.write(df.isna().sum())
+
 st.header('Raw Vehicle Data')
 st.dataframe(df)
 
