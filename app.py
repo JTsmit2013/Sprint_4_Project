@@ -38,3 +38,52 @@ st.write(px.histogram(df_filtered,
                       color='manufacturer',
                       histnorm=histnorm,
                       barmode='overlay'))
+
+# -------------------------------------------------------
+st.title('Scatter Plot by Manufacturer')
+
+# Sidebar filters
+manufacturers = cars_df['manufacturer'].unique()
+selected_manufacturers = st.multiselect('Select Manufacturers', manufacturers, default=manufacturers)
+
+min_price = int(cars_df['price'].min())
+max_price = int(cars_df['price'].max())
+price_range = st.slider('Select Price Range', min_price, max_price, (min_price, max_price))
+
+min_year = int(cars_df['model_year'].min())
+max_year = int(cars_df['model_year'].max())
+year_range = st.slider('Select Model Year Range', min_year, max_year, (min_year, max_year))
+
+# Filter data
+filtered_df = cars_df[
+    (cars_df['manufacturer'].isin(selected_manufacturers)) &
+    (cars_df['price'] >= price_range[0]) &
+    (cars_df['price'] <= price_range[1]) &
+    (cars_df['model_year'] >= year_range[0]) &
+    (cars_df['model_year'] <= year_range[1])
+]
+
+# Create the plot
+fig = go.Figure()
+colors = px.colors.qualitative.Safe
+
+for i, manufacturer in enumerate(selected_manufacturers):
+    df_filtered = filtered_df[filtered_df['manufacturer'] == manufacturer]
+    fig.add_trace(go.Scatter(
+        x=df_filtered['model_year'],
+        y=df_filtered['price'],
+        mode='markers',
+        name=manufacturer,
+        marker=dict(color=colors[i % len(colors)])  # Ensure distinct colors using modulo
+    ))
+
+# Update layout
+fig.update_layout(
+    title='Scatter Plot by Manufacturer',
+    xaxis_title='Model Year',
+    yaxis_title='Price',
+    height=600
+)
+
+# Show plot in Streamlit
+st.plotly_chart(fig)
