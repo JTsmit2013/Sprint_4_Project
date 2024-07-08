@@ -43,24 +43,24 @@ st.write(px.histogram(df_filtered,
 st.title('Scatter Plot by Manufacturer')
 
 # Sidebar filters
-manufacturers = cars_df['manufacturer'].unique()
+manufacturers = df['manufacturer'].unique()
 selected_manufacturers = st.multiselect('Select Manufacturers', manufacturers, default=manufacturers)
 
-min_price = int(cars_df['price'].min())
-max_price = int(cars_df['price'].max())
+min_price = int(df['price'].min())
+max_price = int(df['price'].max())
 price_range = st.slider('Select Price Range', min_price, max_price, (min_price, max_price))
 
-min_year = int(cars_df['model_year'].min())
-max_year = int(cars_df['model_year'].max())
+min_year = int(df['model_year'].min())
+max_year = int(df['model_year'].max())
 year_range = st.slider('Select Model Year Range', min_year, max_year, (min_year, max_year))
 
 # Filter data
-filtered_df = cars_df[
-    (cars_df['manufacturer'].isin(selected_manufacturers)) &
-    (cars_df['price'] >= price_range[0]) &
-    (cars_df['price'] <= price_range[1]) &
-    (cars_df['model_year'] >= year_range[0]) &
-    (cars_df['model_year'] <= year_range[1])
+filtered_df = df[
+    (df['manufacturer'].isin(selected_manufacturers)) &
+    (df['price'] >= price_range[0]) &
+    (df['price'] <= price_range[1]) &
+    (df['model_year'] >= year_range[0]) &
+    (df['model_year'] <= year_range[1])
 ]
 
 # Create the plot
