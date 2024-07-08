@@ -7,6 +7,11 @@ import plotly.graph_objects as go
 df = pd.read_csv('vehicles_us.csv')
 df['manufacturer'] = df['model'].apply(lambda x: x.split()[0])
 
+# Debugging: Print initial data types and first few rows
+st.write("Original DataFrame info:")
+st.write(df.info())
+st.write(df.head())
+
 # Function to safely coerce columns to numeric
 def safe_numeric(df, column):
     df[column] = pd.to_numeric(df[column], errors='coerce')
@@ -19,7 +24,7 @@ for column in numeric_columns:
     df = safe_numeric(df, column)
 
 # Additional check for NaNs after conversion
-st.write("Data after conversion and NaN handling:")
+st.write("DataFrame info after conversion:")
 st.write(df.info())
 st.write(df.head())  # Display the first few rows to verify
 
