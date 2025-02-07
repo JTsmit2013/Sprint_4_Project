@@ -41,10 +41,13 @@ Ensure you have Python installed. You can download it from [python.org](https://
 
 2.Install the required libraries:
    
+   ```bash
    pip install streamlit plotly pandas
+
 
 3.Ensure you have the 'vehicles_us.csv' file and the 'app.py' file in the same directory 
 
 4.Run the Streamlit application
 
-   streamlit run app.py
+   ```bash
+      streamlit run app.py
